@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Apr 13 10:21:25 2018
-
-@author: danielcgc
-"""
 #==================================================================================================================================#
 #Print das opções do programa
 lista=["Controle de Estoque", "0 - sair", "1 - adicionar item", "2 - remover item", "3 - alterar item", "4 - imprimir estoque"]
