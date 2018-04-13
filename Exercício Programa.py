@@ -22,4 +22,3 @@ lista_de_produtos=dict()
           lista_de_produtos[nome_do_produto]=quantidade_inicial
 #==================================================================================================================================#      
 #Opção remover item da lista
-      #
