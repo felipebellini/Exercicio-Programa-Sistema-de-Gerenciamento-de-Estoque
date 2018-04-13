@@ -53,3 +53,8 @@ while i!=0:
        elif nome_do_produto in lista_de_produtos:
            nova_quantidade=input("Nova quantidade: ")
            lista_de_produtos[nome_do_produto]=quantidade_inicial + nova_quantidade
+#==================================================================================================================================#          
+#Opção imprimir estoque da lista
+    elif opcao==4:
+        for k in lista_de_produtos.items():
+            print("{0}: {1}".format(k, lista_de_produtos[k]))
