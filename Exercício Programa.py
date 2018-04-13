@@ -50,6 +50,6 @@ while i!=0:
        nome_do_produto=input("Nome do produto: ")
        if nome_do_produto not in lista_de_produtos:
            print ("Elemento não encontrado.")
-       nova_quantidade=input("Nova quantidade: ")
-       if nome_do_produto in lista_de_produtos: 
+       elif nome_do_produto in lista_de_produtos:
+           nova_quantidade=input("Nova quantidade: ")
            lista_de_produtos[nome_do_produto]=quantidade_inicial + nova_quantidade
