@@ -46,3 +46,10 @@ while i!=0:
           print("Elemento não encontrado.")
 #==================================================================================================================================#          
 #Opção alterar item da lista          
+    elif opcao==3:
+       nome_do_produto=input("Nome do produto: ")
+       if nome_do_produto not in lista_de_produtos:
+           print ("Elemento não encontrado.")
+       nova_quantidade=input("Nova quantidade: ")
+       if nome_do_produto in lista_de_produtos: 
+           lista_de_produtos[nome_do_produto]=quantidade_inicial + nova_quantidade
