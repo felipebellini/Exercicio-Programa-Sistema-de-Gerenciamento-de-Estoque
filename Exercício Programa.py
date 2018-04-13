@@ -1,21 +1,27 @@
 # -*- coding: utf-8 -*-
 """
-Created on Fri Apr 13 10:21:25 2018
+Created on Fri Apr 13 20:16:34 2018
 
 @author: danielcgc
 """
+
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Apr 13 10:21:25 2018
+@author: danielcgc
+"""
+#==================================================================================================================================#     
+#Variáveis
+i=1
+lista_de_comandos=[0,1,2,3,4]
+lista_de_produtos=dict()
 #==================================================================================================================================#
 #Print das opções do programa
-i=1
 while i!=0:
     lista=["Controle de Estoque", "0 - sair", "1 - adicionar item", "2 - remover item", "3 - alterar item", "4 - imprimir estoque"]
     for e in lista:
         print(e)
-#==================================================================================================================================#     
-#Variáveis
-    opcao=int(input("Faça sua escolha:"))
-    lista_de_comandos=[0,1,2,3,4]
-    lista_de_produtos=dict()
+    opcao=int(input("Faça sua escolha:"))   
 #==================================================================================================================================#    
     if opcao not in lista_de_comandos:
         print("Comando inválido.")    
@@ -28,12 +34,13 @@ while i!=0:
 #Opção adicionar produto à lista
     elif opcao==1:
        nome_do_produto=input("Nome do produto:")
-       quantidade_inicial=int(input("Quantidade inicial:"))
        if nome_do_produto not in lista_de_produtos: 
+           quantidade_inicial=int(input("Quantidade inicial:"))
            if quantidade_inicial<0:
                print("A quantidade inicial não pode ser negativa.")
            else:
                lista_de_produtos[nome_do_produto]=quantidade_inicial
+               print(lista_de_produtos)
        else:
            print("Produto já está cadastrado.")
 #==================================================================================================================================#      
@@ -47,14 +54,14 @@ while i!=0:
 #==================================================================================================================================#          
 #Opção alterar item da lista          
     elif opcao==3:
-       nome_do_produto=input("Nome do produto: ")
+       nome_do_produto=input("Nome do produto:")
        if nome_do_produto not in lista_de_produtos:
            print ("Elemento não encontrado.")
        elif nome_do_produto in lista_de_produtos:
-           nova_quantidade=input("Nova quantidade: ")
-           lista_de_produtos[nome_do_produto]=quantidade_inicial + nova_quantidade
+           nova_quantidade=int(input("Nova quantidade:"))
+           lista_de_produtos[nome_do_produto]+=nova_quantidade
 #==================================================================================================================================#          
 #Opção imprimir estoque da lista
     elif opcao==4:
-        for k in lista_de_produtos.items():
-            print("{0}: {1}".format(k, lista_de_produtos[k]))
+        for k in lista_de_produtos:
+            print("{0}:{1}".format(k, lista_de_produtos[k]))
