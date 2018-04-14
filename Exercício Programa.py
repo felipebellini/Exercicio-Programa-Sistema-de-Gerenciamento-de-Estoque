@@ -40,7 +40,6 @@ while i!=0:
                print("A quantidade inicial não pode ser negativa.")
            else:
                lista_de_produtos[nome_do_produto]=quantidade_inicial
-               print(lista_de_produtos)
        else:
            print("Produto já está cadastrado.")
 #==================================================================================================================================#      
