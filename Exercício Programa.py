@@ -7,8 +7,8 @@ lista_de_produtos=dict()
 import json
 #==================================================================================================================================#
 #chamando estoque
-with open('arquivo.txt','r') as arq:
-    lista_de_produtos = json.loads(arq.read())
+with open('estoque.txt','r') as est:
+    lista_de_produtos = json.loads(est.read())
 #==================================================================================================================================#
 #Print das opções do programa
 while i!=0:
@@ -68,5 +68,5 @@ while i!=0:
 
 
 original = json.dumps(lista_de_produtos, sort_keys = True, indent=4)
-with open('arquivo.txt','w') as arq:
-    arq.write(original)
+with open('estoque.txt','w') as est:
+    est.write(original)
