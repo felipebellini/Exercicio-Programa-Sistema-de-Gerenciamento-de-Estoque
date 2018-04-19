@@ -12,7 +12,7 @@ with open('arquivo.txt','r') as arq:
 #==================================================================================================================================#
 #Print das opções do programa
 while i!=0:
-    lista=["Controle de Estoque", "0 - sair", "1 - adicionar item", "2 - remover item", "3 - alterar item", "4 - imprimir estoque"]
+    lista=["Controle de Estoque", "0 - sair", "1 - adicionar item", "2 - remover item", "3 - alterar item", "4 - imprimir estoque", "5 - produtos com quantidade negativa"]
     for e in lista:
         print(e)
     opcao=int(input("Faça sua escolha:"))   
@@ -59,15 +59,14 @@ while i!=0:
     elif opcao==4:
         for k in lista_de_produtos:
             print("{0}:{1}".format(k, lista_de_produtos[k])) 
-            
-            
-            
-            
-            
-            
-            
+#==================================================================================================================================#          
+#
+    elif opcao==5:  
+        for produto in lista_de_produtos:
+            if lista_de_produtos[produto]["quantidade"] < 0:
+                print("{0}:{1}".format(produto, lista_de_produtos[produto]["quantidade"]))
+
 
 original = json.dumps(lista_de_produtos, sort_keys = True, indent=4)
 with open('arquivo.txt','w') as arq:
     arq.write(original)
-    
