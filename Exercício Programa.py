@@ -7,16 +7,15 @@ lista_de_produtos=dict()
 import json
 #==================================================================================================================================#
 #chamando estoque
-with open('estoque.txt','r') as est:
-    lista_de_produtos = json.loads(est.read())
+with open('Lista de produtos.txt','r') as arquivo:
+    lista_de_produtos = json.loads(arquivo.read())
 #==================================================================================================================================#
 #Print das opções do programa
 while i!=0:
     lista=["Controle de Estoque", "0 - sair", "1 - adicionar item", "2 - remover item", "3 - alterar item", "4 - imprimir estoque", "5 - produtos com quantidade negativa"]
     for e in lista:
         print(e)
-    opcao=int(input("Faça sua escolha:"))   
-#==================================================================================================================================#    
+    opcao=int(input("Faça sua escolha:"))       
     if opcao not in lista_de_comandos:
         print("Comando inválido.")    
 #==================================================================================================================================# 
@@ -31,10 +30,16 @@ while i!=0:
        if nome_do_produto not in lista_de_produtos: 
            lista_de_produtos[nome_do_produto] = {}
            quantidade_inicial=int(input("Quantidade inicial:"))
-           if quantidade_inicial<0:
-               print("A quantidade inicial não pode ser negativa.")
-           else:
-               lista_de_produtos[nome_do_produto]['quantidade']=quantidade_inicial
+           while quantidade_inicial<0:
+               quantidade_inicial=int(input("A quantidade inicial não pode ser negativa. Digite uma nova quantidade:"))
+           lista_de_produtos[nome_do_produto]['quantidade']=quantidade_inicial    
+           preco=float(input("Preço:"))    
+           while preco<0:
+               preco=float(input("O preço não pode ser negativo. Digite novamente:"))
+           while preco==0:
+               preco=float(input("O preço não pode ser nulo. Digite novamente:"))
+           lista_de_produtos[nome_do_produto]['preço']=preco
+           print("Produto cadastrado com sucesso.")
        else:
            print("Produto já está cadastrado.")
 #==================================================================================================================================#      
@@ -43,6 +48,7 @@ while i!=0:
        nome_do_produto=input("Nome do produto:")
        if nome_do_produto in lista_de_produtos:
           del(lista_de_produtos[nome_do_produto])
+          print("Produto removido com sucesso.")
        else:
           print("Elemento não encontrado.")
 #==================================================================================================================================#          
@@ -52,21 +58,48 @@ while i!=0:
        if nome_do_produto not in lista_de_produtos:
            print ("Elemento não encontrado.")
        elif nome_do_produto in lista_de_produtos:
-           nova_quantidade=int(input("Nova quantidade:"))
-           lista_de_produtos[nome_do_produto]['quantidade']+=nova_quantidade
+           print("1 - alterar quantidade")
+           print("2 - alterar preço")
+           print("3 - alterar ambos")
+           opcao=int(input("Faça sua escolha:"))
+           while opcao < 1 or opcao > 3:
+               opcao=int(input("Comando inválido.Digite novamente:"))
+           if opcao == 1:
+               print("Quantidade atual:{0}".format(lista_de_produtos[nome_do_produto]['quantidade']))
+               nova_quantidade=int(input("Nova quantidade:"))
+               lista_de_produtos[nome_do_produto]['quantidade']+=nova_quantidade
+               print("Quantidade alterada com sucesso.")
+           elif opcao == 2:
+               print("Preço atual:{0}".format(lista_de_produtos[nome_do_produto]['preço']))
+               novo_preco=float(input("Novo preço:"))
+               while novo_preco + lista_de_produtos[nome_do_produto]['preço'] < 0 or novo_preco + lista_de_produtos[nome_do_produto]['preço'] == 0 :
+                   novo_preco=float(input("O preço não pode ser negativo. Digite novamente:"))    
+               lista_de_produtos[nome_do_produto]['preço']+=novo_preco
+               print("Preço alterado com sucesso.")
+           elif opcao == 3:
+               print(lista_de_produtos[nome_do_produto])
+               nova_quantidade=int(input("Nova quantidade:"))
+               lista_de_produtos[nome_do_produto]['quantidade']+=nova_quantidade
+               novo_preco=float(input("Novo preço:"))
+               while novo_preco + lista_de_produtos[nome_do_produto]['preço'] < 0 :
+                   novo_preco=float(input("O preço não pode ser negativo. Digite novamente:"))
+               while novo_preco + lista_de_produtos[nome_do_produto]['preço'] == 0:
+                   novo_preco=float(input("O preço não pode ser nulo. Digite novamente:"))
+               lista_de_produtos[nome_do_produto]['preço']+=novo_preco
+               print("Item alterado com sucesso.")
 #==================================================================================================================================#          
 #Opção imprimir estoque da lista
     elif opcao==4:
         for k in lista_de_produtos:
             print("{0}:{1}".format(k, lista_de_produtos[k])) 
 #==================================================================================================================================#          
-#
+#Opcão imprimir produtos com quantidade negativa
     elif opcao==5:  
         for produto in lista_de_produtos:
             if lista_de_produtos[produto]["quantidade"] < 0:
                 print("{0}:{1}".format(produto, lista_de_produtos[produto]["quantidade"]))
 
 
-original = json.dumps(lista_de_produtos, sort_keys = True, indent=4)
-with open('estoque.txt','w') as est:
-    est.write(original)
+atualizacao = json.dumps(lista_de_produtos, sort_keys = True, indent=4)
+with open('Lista de produtos.txt','w') as arquivo:
+    arquivo.write(atualizacao)
