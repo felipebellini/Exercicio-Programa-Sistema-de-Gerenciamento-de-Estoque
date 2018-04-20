@@ -100,6 +100,6 @@ while i!=0:
                 print("{0}:{1}".format(produto, lista_de_produtos[produto]["quantidade"]))
 
 
-atualizacao = json.dumps(lista_de_produtos, sort_keys = True, indent=4)
+atualizacao = json.dumps(lista_de_produtos, sort_keys = True, indent=4,ensure_ascii=False)
 with open('Lista de produtos.txt','w') as arquivo:
     arquivo.write(atualizacao)
