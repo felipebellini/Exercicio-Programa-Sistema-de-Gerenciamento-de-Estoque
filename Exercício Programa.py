@@ -11,6 +11,8 @@ with open('Lista de produtos.txt','r') as arquivo:
     lista_de_produtos = json.loads(arquivo.read())
 #==================================================================================================================================#
 #Print das opções do programa
+while i!=0:
+    lista=["Controle de Estoque", "0 - sair
     for e in lista:
         print(e)
     opcao=int(input("Faça sua escolha:"))       
