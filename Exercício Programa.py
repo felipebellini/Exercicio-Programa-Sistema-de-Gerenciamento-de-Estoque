@@ -104,7 +104,7 @@ while i!=0:
         valor_monetario = 0
         for item in lista_de_produtos:
             valor_monetario += lista_de_produtos[item]['quantidade'] * lista_de_produtos[item]['preço unitário']
-        print("O valor monetário total no estoque é:{0}".format(valor_monetario))
+        print("O valor monetário total no estoque é: {0}".format(valor_monetario))
 
 atualizacao = json.dumps(lista_de_produtos, sort_keys = True, indent=4,ensure_ascii=False)
 with open('Lista de produtos.txt','w') as arquivo:
