@@ -2,7 +2,7 @@
 #==================================================================================================================================#     
 #Variáveis
 i=1
-lista_de_comandos=[0,1,2,3,4,5]
+lista_de_comandos=[0,1,2,3,4,5,6]
 lista_de_produtos=dict()
 import json
 #==================================================================================================================================#
@@ -12,7 +12,7 @@ with open('Lista de produtos.txt','r') as arquivo:
 #==================================================================================================================================#
 #Print das opções do programa
 while i!=0:
-    lista=["Controle de Estoque", "0 - sair", "1 - adicionar item", "2 - remover item", "3 - alterar item", "4 - imprimir estoque", "5 - produtos com quantidade negativa"]
+    lista=["Controle de Estoque", "0 - sair", "1 - adicionar item", "2 - remover item", "3 - alterar item", "4 - imprimir estoque", "5 - produtos com quantidade negativa","6 - valor monetário do estoque"]
     for e in lista:
         print(e)
     opcao=int(input("Faça sua escolha:"))       
@@ -33,12 +33,12 @@ while i!=0:
            while quantidade_inicial<0:
                quantidade_inicial=int(input("A quantidade inicial não pode ser negativa. Digite uma nova quantidade:"))
            lista_de_produtos[nome_do_produto]['quantidade']=quantidade_inicial    
-           preco=float(input("Preço unitário:"))    
+           preco=float(input("Preço:"))    
            while preco<0:
                preco=float(input("O preço não pode ser negativo. Digite novamente:"))
            while preco==0:
                preco=float(input("O preço não pode ser nulo. Digite novamente:"))
-           lista_de_produtos[nome_do_produto]['preço unitário']=preco
+           lista_de_produtos[nome_do_produto]['preço']=preco
            print("Produto cadastrado com sucesso.")
        else:
            print("Produto já está cadastrado.")
@@ -59,7 +59,7 @@ while i!=0:
            print ("Elemento não encontrado.")
        elif nome_do_produto in lista_de_produtos:
            print("1 - alterar quantidade")
-           print("2 - alterar preço unitário")
+           print("2 - alterar preço")
            print("3 - alterar ambos")
            opcao=int(input("Faça sua escolha:"))
            while opcao < 1 or opcao > 3:
@@ -70,22 +70,22 @@ while i!=0:
                lista_de_produtos[nome_do_produto]['quantidade']+=nova_quantidade
                print("Quantidade alterada com sucesso.")
            elif opcao == 2:
-               print("Preço unitário atual:{0}".format(lista_de_produtos[nome_do_produto]['preço unitário']))
-               novo_preco=float(input("Novo preço unitário:"))
-               while novo_preco + lista_de_produtos[nome_do_produto]['preço unitário'] < 0 or novo_preco + lista_de_produtos[nome_do_produto]['preço unitário'] == 0 :
-                   novo_preco=float(input("O preço unitário não pode ser negativo. Digite novamente:"))    
-               lista_de_produtos[nome_do_produto]['preço unitário']+=novo_preco
-               print("Preço unitário alterado com sucesso.")
+               print("Preço atual:{0}".format(lista_de_produtos[nome_do_produto]['preço']))
+               novo_preco=float(input("Novo preço:"))
+               while novo_preco + lista_de_produtos[nome_do_produto]['preço'] < 0 or novo_preco + lista_de_produtos[nome_do_produto]['preço'] == 0 :
+                   novo_preco=float(input("O preço não pode ser negativo. Digite novamente:"))    
+               lista_de_produtos[nome_do_produto]['preço']+=novo_preco
+               print("Preço alterado com sucesso.")
            elif opcao == 3:
                print(lista_de_produtos[nome_do_produto])
                nova_quantidade=int(input("Nova quantidade:"))
                lista_de_produtos[nome_do_produto]['quantidade']+=nova_quantidade
-               novo_preco=float(input("Novo preço unitário:"))
-               while novo_preco + lista_de_produtos[nome_do_produto]['preço unitário'] < 0 :
-                   novo_preco=float(input("O preço unitário não pode ser negativo. Digite novamente:"))
-               while novo_preco + lista_de_produtos[nome_do_produto]['preço unitário'] == 0:
-                   novo_preco=float(input("O preço unitário não pode ser nulo. Digite novamente:"))
-               lista_de_produtos[nome_do_produto]['preço unitário']+=novo_preco
+               novo_preco=float(input("Novo preço:"))
+               while novo_preco + lista_de_produtos[nome_do_produto]['preço'] < 0 :
+                   novo_preco=float(input("O preço não pode ser negativo. Digite novamente:"))
+               while novo_preco + lista_de_produtos[nome_do_produto]['preço'] == 0:
+                   novo_preco=float(input("O preço não pode ser nulo. Digite novamente:"))
+               lista_de_produtos[nome_do_produto]['preço']+=novo_preco
                print("Item alterado com sucesso.")
 #==================================================================================================================================#          
 #Opção imprimir estoque da lista
@@ -101,10 +101,10 @@ while i!=0:
 #==================================================================================================================================#          
 #Opção de Imprimir o valor monetário total em estoque
     elif opcao==6:
-        soma = 0
-        for preco in lista_de_produtos:
-            soma += lista_de_produtos['preço unitário']
-        print("{0}:{1}".format(soma, lista_de_produtos['preço unitário']))
+        valor_monetario = 0
+        for item in lista_de_produtos:
+            valor_monetario += lista_de_produtos[item]['quantidade'] * lista_de_produtos[item]['preço']
+        print("O valor monetário total no estoque é:{0}".format(valor_monetario))
 
 atualizacao = json.dumps(lista_de_produtos, sort_keys = True, indent=4,ensure_ascii=False)
 with open('Lista de produtos.txt','w') as arquivo:
