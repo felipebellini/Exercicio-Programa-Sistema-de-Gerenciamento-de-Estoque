@@ -98,7 +98,13 @@ while i!=0:
         for produto in lista_de_produtos:
             if lista_de_produtos[produto]["quantidade"] < 0:
                 print("{0}:{1}".format(produto, lista_de_produtos[produto]["quantidade"]))
-
+#==================================================================================================================================#          
+#Opção de Imprimir o valor monetário total em estoque
+    elif opcao==6:
+        soma = 0
+        for preco in lista_de_produtos:
+            soma += lista_de_produtos[preco]
+        print("{0}:{1}".format(soma, lista_de_produtos[preco]))
 
 atualizacao = json.dumps(lista_de_produtos, sort_keys = True, indent=4,ensure_ascii=False)
 with open('Lista de produtos.txt','w') as arquivo:
