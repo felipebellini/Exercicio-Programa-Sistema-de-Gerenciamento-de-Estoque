@@ -1,4 +1,5 @@
--# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
+
 import json
 Loja=dict()
 lista_de_produtos={}
@@ -52,7 +53,7 @@ while i!=0:
                           while quantidade_inicial<0:
                               quantidade_inicial=int(input("A quantidade inicial não pode ser negativa. Digite uma nova quantidade:"))
                           lista_de_produtos[nome_do_produto]['quantidade']=quantidade_inicial    
-                          preco=float(input("Preço unitário:"))    
+                          preco_unitario=float(input("Preço unitário:"))    
                           while preco_unitario<0:
                                   preco_unitario=float(input("O preço não pode ser negativo. Digite novamente:"))
                           while preco_unitario==0:
@@ -75,9 +76,9 @@ while i!=0:
 #Opção alterar item da lista          
               elif opcao==3:
                   nome_do_produto=input("Nome do produto:")
-                  if nome_do_produto not in lista_de_produtos:
+                  if nome_do_produto not in Loja[nome_da_loja]['Lista de produtos']:
                       print ("Elemento não encontrado.")
-                  elif nome_do_produto in lista_de_produtos:
+                  elif nome_do_produto in Loja[nome_da_loja]['Lista de produtos']:
                           print("1 - alterar quantidade")
                           print("2 - alterar preço unitário")
                           print("3 - alterar ambos")
