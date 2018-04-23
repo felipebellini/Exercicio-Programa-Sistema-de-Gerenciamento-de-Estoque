@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+-# -*- coding: utf-8 -*-
 import json
 Loja=dict()
 lista_de_produtos={}
@@ -52,12 +52,12 @@ while i!=0:
                           while quantidade_inicial<0:
                               quantidade_inicial=int(input("A quantidade inicial não pode ser negativa. Digite uma nova quantidade:"))
                           lista_de_produtos[nome_do_produto]['quantidade']=quantidade_inicial    
-                          preco=float(input("Preço:"))    
-                          while preco<0:
-                                  preco=float(input("O preço não pode ser negativo. Digite novamente:"))
-                          while preco==0:
-                                  preco=float(input("O preço não pode ser nulo. Digite novamente:"))
-                          lista_de_produtos[nome_do_produto]['preço']=preco
+                          preco=float(input("Preço unitário:"))    
+                          while preco_unitario<0:
+                                  preco_unitario=float(input("O preço não pode ser negativo. Digite novamente:"))
+                          while preco_unitario==0:
+                                  preco_unitario=float(input("O preço não pode ser nulo. Digite novamente:"))
+                          lista_de_produtos[nome_do_produto]['preço unitário']=preco_unitario
                           Loja[nome_da_loja]['Lista de produtos']=lista_de_produtos
                           print("Produto cadastrado com sucesso.")
                    else:
@@ -79,7 +79,7 @@ while i!=0:
                       print ("Elemento não encontrado.")
                   elif nome_do_produto in lista_de_produtos:
                           print("1 - alterar quantidade")
-                          print("2 - alterar preço")
+                          print("2 - alterar preço unitário")
                           print("3 - alterar ambos")
                           opcao=int(input("Faça sua escolha:"))
                           while opcao < 1 or opcao > 3:
@@ -90,22 +90,22 @@ while i!=0:
                               Loja[nome_da_loja]['Lista de produtos'][nome_do_produto]['quantidade']+=nova_quantidade
                               print("Quantidade alterada com sucesso.")
                           elif opcao == 2:
-                              print("Preço atual:{0}".format(Loja[nome_da_loja]['Lista de produtos'][nome_do_produto]['preço']))
-                              novo_preco=float(input("Novo preço:"))
-                              while novo_preco + Loja[nome_da_loja]['Lista de produtos'][nome_do_produto]['preço'] < 0 or novo_preco + Loja[nome_da_loja]['Lista de produtos'][nome_do_produto]['preço'] == 0 :
+                              print("Preço atual:{0}".format(Loja[nome_da_loja]['Lista de produtos'][nome_do_produto]['preço unitário']))
+                              novo_preco=float(input("Novo preço unitário:"))
+                              while novo_preco + Loja[nome_da_loja]['Lista de produtos'][nome_do_produto]['preço unitário'] < 0 or novo_preco + Loja[nome_da_loja]['Lista de produtos'][nome_do_produto]['preço unitário'] == 0 :
                                   novo_preco=float(input("O preço não pode ser negativo. Digite novamente:"))    
-                              Loja[nome_da_loja]['Lista de produtos'][nome_do_produto]['preço']+=novo_preco
+                              Loja[nome_da_loja]['Lista de produtos'][nome_do_produto]['preço unitário']+=novo_preco
                               print("Preço alterado com sucesso.")
                           elif opcao == 3:
                               print(Loja[nome_da_loja]['Lista de produtos'][nome_do_produto])
                               nova_quantidade=int(input("Nova quantidade:"))
                               Loja[nome_da_loja]['Lista de produtos'][nome_do_produto]['quantidade']+=nova_quantidade
-                              novo_preco=float(input("Novo preço:"))
-                              while novo_preco + Loja[nome_da_loja]['Lista de produtos'][nome_do_produto]['preço'] < 0 :
+                              novo_preco=float(input("Novo preço unitário:"))
+                              while novo_preco + Loja[nome_da_loja]['Lista de produtos'][nome_do_produto]['preço unitário'] < 0 :
                                   novo_preco=float(input("O preço não pode ser negativo. Digite novamente:"))
-                              while novo_preco + Loja[nome_da_loja]['Lista de produtos'][nome_do_produto]['preço'] == 0:
+                              while novo_preco + Loja[nome_da_loja]['Lista de produtos'][nome_do_produto]['preço unitário'] == 0:
                                   novo_preco=float(input("O preço não pode ser nulo. Digite novamente:"))
-                              Loja[nome_da_loja]['Lista de produtos'][nome_do_produto]['preço']+=novo_preco
+                              Loja[nome_da_loja]['Lista de produtos'][nome_do_produto]['preço unitário']+=novo_preco
                               print("Item alterado com sucesso.") 
 #==================================================================================================================================#          
 #Opção imprimir estoque da lista
@@ -123,7 +123,7 @@ while i!=0:
               elif opcao==6:
                   valor_monetario = 0
                   for item in Loja[nome_da_loja]['Lista de produtos']:
-                      valor_monetario += Loja[nome_da_loja]['Lista de produtos'][item]['quantidade'] * Loja[nome_da_loja]['Lista de produtos'][item]['preço']
+                      valor_monetario += Loja[nome_da_loja]['Lista de produtos'][item]['quantidade'] * Loja[nome_da_loja]['Lista de produtos'][item]['preço unitário']
                   print("O valor monetário total no estoque é:{0}".format(valor_monetario))                          
 #==================================================================================================================================#  
 #==================================================================================================================================#                       
