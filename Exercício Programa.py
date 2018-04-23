@@ -27,8 +27,8 @@ while i!=0:
 #Opção analisar loja
     elif opcao == 1:
         nome_da_loja=input("Digite o nome da loja:")
-        while nome_da_loja not in Loja:
-            nome_da_loja=input("Loja não encontrada. Digite novamente:")
+        if nome_da_loja not in Loja:
+            print("Loja não encontrada.")
         while i!=0:
               print(nome_da_loja)
               lista=["Controle de Estoque", "0 - sair", "1 - adicionar item", "2 - remover item", "3 - alterar item", "4 - imprimir estoque", "5 - produtos com quantidade negativa","6 - valor monetário do estoque"]
@@ -141,10 +141,11 @@ while i!=0:
 #Opção remover loja
     elif opcao == 3:
                   nome_da_loja=input("Digite o nome da loja:")
-                  while nome_da_loja not in Loja:
-                      nome_da_loja=input("Loja não encontrada. Digite novamente:")
-                  del(Loja[nome_da_loja])    
-                  print("Loja removida com sucesso.")             
+                  if nome_da_loja not in Loja:
+                      print("Loja não encontrada.")
+                  else:
+                      del(Loja[nome_da_loja])    
+                      print("Loja removida com sucesso.")             
 #==================================================================================================================================#             
 atualizacao = json.dumps(Loja, sort_keys = True, indent=4,ensure_ascii=False)
 with open('Lista de produtos.txt','w') as arquivo:
