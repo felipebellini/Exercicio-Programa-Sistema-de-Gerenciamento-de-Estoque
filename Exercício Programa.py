@@ -4,7 +4,7 @@ import json
 Loja=dict()
 lista_de_produtos={}
 i=1
-lista_de_comandos=[0,1,2,3]
+lista_de_comandos=[0,1,2,3,4]
 lista_de_comandos2=[0,1,2,3,4,5,6]
 #==================================================================================================================================#
 #chamando estoque
@@ -13,7 +13,7 @@ with open('Lista de produtos.txt','r') as arquivo:
 #==================================================================================================================================#
 #Print das opções do programa    
 while i!=0:
-    lista=["Controle de Loja", "0 - sair", "1 - analisar loja", "2 - adicionar loja", "3 - remover loja"]
+    lista=["Controle de Loja", "0 - sair", "1 - analisar loja", "2 - adicionar loja", "3 - remover loja","4 - imprimir lojas cadastradas"]
     for e in lista:
         print(e)
     opcao=int(input("Faça sua escolha:"))       
@@ -148,6 +148,13 @@ while i!=0:
                       del(Loja[nome_da_loja])    
                       print("Loja removida com sucesso.")             
 #==================================================================================================================================#             
+#==================================================================================================================================#             
+#Opção imprimir lojas cadastradas
+    elif opcao == 4:
+                for e in Loja:
+                    print(e)
+#==================================================================================================================================#             
+#==================================================================================================================================#                                 
 atualizacao = json.dumps(Loja, sort_keys = True, indent=4,ensure_ascii=False)
 with open('Lista de produtos.txt','w') as arquivo:
     arquivo.write(atualizacao)
