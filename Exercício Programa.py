@@ -155,6 +155,14 @@ while i!=0:
                     print(e)
 #==================================================================================================================================#             
 #==================================================================================================================================#                                 
-atualizacao = json.dumps(Loja, sort_keys = True, indent=4,ensure_ascii=False)
-with open('Lista de produtos.txt','w') as arquivo:
-    arquivo.write(atualizacao)
+#firebase
+from firebase import firebase
+firebase = firebase.FirebaseApplication ('https://desoft-cdf.firebaseio.com/', None)
+
+if firebase.get('DeSoft CDF') is None:
+    estoque = {}
+else:
+    estoque = firebase.get('DeSoft CDF', None)
+   
+    firebase.patch('DeSoft Ca Dan Fe', estoque)
+   
