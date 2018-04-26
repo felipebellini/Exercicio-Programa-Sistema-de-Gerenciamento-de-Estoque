@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import json
+from firebase import firebase
 Loja=dict()
 lista_de_produtos={}
 i=1
@@ -156,7 +156,6 @@ while i!=0:
 #==================================================================================================================================#             
 #==================================================================================================================================#                                 
 #firebase
-from firebase import firebase
 firebase = firebase.FirebaseApplication ('https://desoft-cdf.firebaseio.com/', None)
 
 if firebase.get('DeSoft CDF') is None:
