@@ -163,5 +163,5 @@ if firebase.get('DeSoft CDF') is None:
 else:
     estoque = firebase.get('DeSoft CDF', None)
    
-    firebase.patch('DeSoft Ca Dan Fe', estoque)
+    firebase.patch('https://desoft-cdf.firebaseio.com/', estoque)
    
