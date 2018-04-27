@@ -1,15 +1,27 @@
 # -*- coding: utf-8 -*-
 
+
+#==================================================================================================================================#             
+#==================================================================================================================================#                                 
+#firebase
 from firebase import firebase
+firebase = firebase.FirebaseApplication ('https://desoft-cdf.firebaseio.com/', None)
+
+if firebase.get('DeSoft CDF') is None:
+    estoque = {}
+else:
+    estoque = firebase.get('DeSoft CDF', None)
+   
+    firebase.patch('https://desoft-cdf.firebaseio.com/', estoque)
+   
+
+#==================================================================================================================================#             
+#==================================================================================================================================#             
 Loja=dict()
 lista_de_produtos={}
 i=1
 lista_de_comandos=[0,1,2,3,4]
 lista_de_comandos2=[0,1,2,3,4,5,6]
-#==================================================================================================================================#
-#chamando estoque
-with open('Lista de produtos.txt','r') as arquivo:
-    Loja = json.loads(arquivo.read())
 #==================================================================================================================================#
 #Print das opções do programa    
 while i!=0:
@@ -156,12 +168,4 @@ while i!=0:
 #==================================================================================================================================#             
 #==================================================================================================================================#                                 
 #firebase
-firebase = firebase.FirebaseApplication ('https://desoft-cdf.firebaseio.com/', None)
-
-if firebase.get('DeSoft CDF') is None:
-    estoque = {}
-else:
-    estoque = firebase.get('DeSoft CDF', None)
-   
-    firebase.patch('https://desoft-cdf.firebaseio.com/', estoque)
-   
+firebase.patch('https://desoft-cdf.firebaseio.com/estoque', lojas)
