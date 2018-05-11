@@ -1,0 +1,124 @@
+# -*- coding: utf-8 -*-
+
+s = True
+pquad = -1
+# =============================================================================================================================#
+# Criando tela
+
+import tkinter as tk
+
+tela_de_jogo = tk.Tk()
+tela_de_jogo.title("Jogo da Velha Múltiplo")
+tela_de_jogo["bg"] = "black"
+
+
+# =============================================================================================================================#
+# Classes
+
+class Button:
+    def __init__(self, linha, coluna, posicao):
+        self.conteudo_label = tk.StringVar()
+        botão = tk.Button(tela_de_jogo, height=2, width=4)
+        botão.configure(textvariable=self.conteudo_label)
+
+        botão.configure(command=self.enquadrar)
+        botão.grid(row=linha, column=coluna)
+        self.foiclicado = False
+        self.quadrante =-1
+        self.posicao = posicao
+
+    def enquadrar(self):
+        if self in Quadrantes[0]:
+            self.quadrante=0
+        elif self in Quadrantes[1]:
+            self.quadrante=1
+        elif self in Quadrantes[2]:
+            self.quadrante=2
+        elif self in Quadrantes[3]:
+            self.quadrante=3
+        elif self in Quadrantes[4]:
+            self.quadrante=4
+        elif self in Quadrantes[5]:
+            self.quadrante=5
+        elif self in Quadrantes[6]:
+            self.quadrante=6
+        elif self in Quadrantes[7]:
+            self.quadrante=7
+        elif self in Quadrantes[8]:
+            self.quadrante=8
+
+
+        global pquad
+        if self.quadrante == pquad or pquad==-1:
+            if self.foiclicado == False:
+                global s
+                if s == True:
+                    self.conteudo_label.set("X")
+                    s = False
+                elif s == False:
+                    self.conteudo_label.set("O")
+                    s = True
+            self.foiclicado = True
+        pquad = self.posicao
+
+# =============================================================================================================================#
+# Criando listas
+
+Quadrantes = [[0, 0], [0, 6], [0, 12], [6, 0], [6, 6], [6, 12], [12, 0], [12, 6], [12, 12]]
+linha = 0
+coluna = 0
+posicao = 0
+for elemento in Quadrantes:
+    linha = elemento[0]
+    coluna = elemento[1]
+    for b in range(0, 9):
+        if b <= 2:
+            posicao=b
+            elemento.append(Button(linha, coluna,posicao))
+            coluna += 1
+            posicao += 1
+        elif b == 3:
+            linha += 1
+            coluna = elemento[1]
+            posicao = b
+            elemento.append(Button(linha, coluna,posicao))
+            coluna += 1
+
+            posicao += 1
+
+        elif b <= 5:
+            posicao = b
+            elemento.append(Button(linha, coluna,posicao))
+            coluna += 1
+            posicao += 1
+
+        elif b == 6:
+            linha += 1
+            coluna = elemento[1]
+            posicao = b
+            elemento.append(Button(linha, coluna,posicao))
+            coluna += 1
+            posicao += 1
+
+        elif b <= 8:
+            posicao = b
+            elemento.append(Button(linha, coluna,posicao))
+            coluna += 1
+            posicao += 1
+
+# =============================================================================================================================#
+# Criando os labels grande
+labelGrandeH1 = tk.Label(tela_de_jogo, height=2, bg="black")
+labelGrandeH1.grid(row=5, column=0)
+
+labelGrandeH2 = tk.Label(tela_de_jogo, height=2, bg="black")
+labelGrandeH2.grid(row=11, column=0)
+
+labelGrandeV1 = tk.Label(tela_de_jogo, width=4, bg="black")
+labelGrandeV1.grid(row=0, column=5)
+
+labelGrandeV2 = tk.Label(tela_de_jogo, width=4, bg="black")
+labelGrandeV2.grid(row=0, column=11)
+
+tela_de_jogo.geometry("409x441")
+tela_de_jogo.mainloop()
